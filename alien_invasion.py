@@ -53,7 +53,7 @@ class AlienInvasition:
         while True:
             self._check_events()
             self.ship.update() #ships position will be updated after checked for keyword events before update the screen
-            self.bullets.update() #it will automatically calls update() for each sprite in the group.
+            self._update_bullets()
             self._update_screen() #updating the screen
             
     def _check_events(self): #simplyfying the run_game method
@@ -83,7 +83,7 @@ class AlienInvasition:
         elif event.key == pygame.K_q: #press q to quit the game
             sys.exit()
             
-        elif event.key == pygame.K_SPACE:
+        elif event.key == pygame.K_SPACE: #call bullet when spacebar is pressed
             self._fire_bullet()
             
             
@@ -104,17 +104,32 @@ class AlienInvasition:
     
     def _fire_bullet(self):
         #Create a new bullet and add it to the bullets group.
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
         
     
     
-    
+    def _update_bullets(self):
+        #Update position of bullets and get rid of old bullets.
+        # Update bullet positions.
+        self.bullets.update() #it will automatically calls update() for each sprite in the group.
+            
+        #get rid of bullets that have disappeared
+        for bullet in self.bullets.copy(): # it enables to modify bullets inside the loop.
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        
+        
+        
+        #print(len(self.bullets))
+        
     
          
     def _update_screen(self):
         #update image on the screen, and flip to the new screen 
-               
+              
         self.screen.fill(self.settings.bg_color) 
         #self.settings to access background color when filling the screen 
         
