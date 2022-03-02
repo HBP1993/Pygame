@@ -5,8 +5,8 @@ class Settings:
         '''Instializaing game settings'''
         
         #screen setting
-        self.screen_width = 1000
-        self.screen_height = 600
+        #self.screen_width = 1000 #no need to keep this after making it full screen
+        #self.screen_height = 600
         self.bg_color = (230, 230, 230) #tuple 
         
         #ship setting

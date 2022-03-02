@@ -90,7 +90,7 @@ class AlienInvasition:
             if event.type == pygame.QUIT:
                 sys.exit()
                 
-            #SHIP MOVEMENT    
+            #SHIP MOVEMENT / responding to key press 
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
             
@@ -227,10 +227,7 @@ class AlienInvasition:
             
     
     
-    
-    
-    
-        
+
     
     def _update_aliens(self):
         
